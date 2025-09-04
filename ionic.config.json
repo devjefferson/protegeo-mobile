@@ -1,0 +1,7 @@
+{
+  "name": "protegeo",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react-vite"
+}
