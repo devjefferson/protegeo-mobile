@@ -1,0 +1,79 @@
+.profile-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding-bottom: 40px;
+}
+
+.profile-header {
+  text-align: center;
+  padding: 32px 0;
+}
+
+.profile-avatar {
+  width: 100px;
+  height: 100px;
+  margin: 0 auto 16px;
+  background: var(--ion-color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-avatar ion-icon {
+  font-size: 72px;
+  color: var(--ion-color-primary-contrast);
+}
+
+.profile-name {
+  font-size: 24px;
+  font-weight: 600;
+  margin: 0 0 4px 0;
+}
+
+.profile-email {
+  font-size: 14px;
+  margin: 0;
+}
+
+.profile-form {
+  margin-bottom: 24px;
+  border-radius: 12px;
+}
+
+.profile-form ion-item-divider {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  --background: transparent;
+  --color: var(--ion-color-medium);
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+.profile-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.profile-logout {
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid var(--ion-color-light);
+}
+
+/* Adicionar espaçamento nos itens do formulário */
+.profile-form ion-item {
+  --padding-start: 16px;
+  --padding-end: 16px;
+}
+
+.profile-form ion-item[disabled] {
+  opacity: 0.7;
+}
+
+
+
+

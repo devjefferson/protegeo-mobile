@@ -1,0 +1,40 @@
+.splash-content {
+  --background: var(--ion-background-color);
+}
+
+.splash-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  padding: 24px;
+}
+
+.splash-logo {
+  width: 80px;
+  height: 80px;
+  margin-bottom: 20px;
+  border-radius: 20px;
+  background: var(--ion-color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.splash-logo ion-icon {
+  font-size: 44px;
+  color: var(--ion-color-primary-contrast);
+}
+
+.splash-title {
+  font-size: 32px;
+  font-weight: 700;
+  margin: 0 0 24px 0;
+  color: var(--ion-text-color);
+}
+
+.splash-progress {
+  width: 160px;
+  max-width: 80%;
+}

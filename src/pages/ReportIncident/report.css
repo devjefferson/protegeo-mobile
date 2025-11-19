@@ -1,0 +1,168 @@
+.report-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding-bottom: 40px;
+}
+
+.report-subtitle {
+  font-size: 14px;
+  margin: 0 0 16px 0;
+  text-align: center;
+}
+
+.report-section {
+  margin: 24px 0;
+  padding: 16px;
+  background: var(--ion-color-light);
+  border-radius: 12px;
+}
+
+.section-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0 0 4px 0;
+}
+
+.section-subtitle {
+  font-size: 13px;
+  margin: 0 0 16px 0;
+  color: var(--ion-color-medium);
+}
+
+/* Grid de fotos */
+.photos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.photo-item {
+  position: relative;
+  aspect-ratio: 1;
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--ion-color-light-shade);
+}
+
+.photo-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.remove-photo-btn {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.7);
+  --padding-start: 0;
+  --padding-end: 0;
+}
+
+.add-photo-btn {
+  aspect-ratio: 1;
+  border: 2px dashed var(--ion-color-medium);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: var(--ion-background-color);
+}
+
+.add-photo-btn:hover {
+  border-color: var(--ion-color-primary);
+  background: var(--ion-color-primary-tint);
+}
+
+.add-photo-btn ion-icon {
+  font-size: 32px;
+  color: var(--ion-color-medium);
+  margin-bottom: 4px;
+}
+
+.add-photo-btn span {
+  font-size: 12px;
+  color: var(--ion-color-medium);
+  text-align: center;
+  padding: 0 8px;
+}
+
+/* Botão de submit */
+.submit-button {
+  margin-top: 32px;
+  --padding-top: 14px;
+  --padding-bottom: 14px;
+  font-weight: 600;
+}
+
+/* Ajustes para items */
+.report-container ion-item {
+  --padding-start: 16px;
+  --padding-end: 16px;
+  margin-bottom: 8px;
+}
+
+/* Mapa de localização */
+.location-map {
+  width: 100%;
+  height: 300px;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 16px;
+  border: 2px solid var(--ion-color-light-shade);
+}
+
+.location-map .mapboxgl-canvas {
+  cursor: crosshair;
+}
+
+.gps-button {
+  margin-top: 8px;
+}
+
+/* Marcador de localização */
+.location-marker {
+  animation: markerPulse 2s infinite;
+}
+
+@keyframes markerPulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Modo escuro */
+@media (prefers-color-scheme: dark) {
+  .report-section {
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  .add-photo-btn {
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  .location-map {
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+}
+
+
+
+
+

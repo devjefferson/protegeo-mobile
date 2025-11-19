@@ -1,0 +1,170 @@
+/* Header fixo */
+ion-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+ion-toolbar {
+  --background: var(--ion-background-color);
+}
+
+.reports-counter {
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+/* Cards de ocorrência */
+.report-card {
+  margin-bottom: 16px;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.report-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.report-image-container {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  background: var(--ion-color-light);
+}
+
+.report-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Header do card */
+.card-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.report-title {
+  font-size: 18px;
+  font-weight: 600;
+  flex: 1;
+  margin: 0;
+}
+
+.status-chip {
+  height: 28px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.category-badge {
+  font-size: 11px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Descrição */
+.report-description {
+  margin: 12px 0;
+  font-size: 14px;
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Metadados */
+.report-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid var(--ion-color-light);
+}
+
+.meta-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.meta-item ion-icon {
+  font-size: 16px;
+  color: var(--ion-color-medium);
+}
+
+.meta-item small {
+  font-size: 12px;
+}
+
+/* Badge de fotos */
+.photos-badge {
+  margin-top: 12px;
+}
+
+/* Estado vazio */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.empty-icon {
+  font-size: 80px;
+  color: var(--ion-color-light);
+  margin-bottom: 16px;
+}
+
+.empty-state h3 {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0 0 8px 0;
+}
+
+.empty-state p {
+  font-size: 14px;
+  color: var(--ion-color-medium);
+  margin: 0;
+}
+
+/* Segment customizado */
+ion-segment {
+  --background: var(--ion-color-light);
+}
+
+ion-segment-button {
+  font-size: 13px;
+  text-transform: none;
+  min-height: 32px;
+}
+
+/* Modo escuro */
+@media (prefers-color-scheme: dark) {
+  .report-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  }
+
+  .report-meta {
+    border-top-color: rgba(255, 255, 255, 0.1);
+  }
+}
+
+
+
+
+
+
+
