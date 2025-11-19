@@ -27,10 +27,12 @@ import {
   checkmarkCircleOutline,
   ellipseOutline,
   hourglassOutline,
+  listOutline,
+  checkmarkDoneOutline,
 } from 'ionicons/icons';
 import { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import { collection, query, orderBy, getDocs, where } from 'firebase/firestore';
+import { collection, query, orderBy, getDocs } from 'firebase/firestore';
 import { db } from '../config/firebase';
 import type { ReportData } from './ReportIncident/schema';
 import './Tab2.css';
@@ -40,6 +42,7 @@ type FilterType = 'all' | 'pending' | 'in_progress' | 'resolved';
 const Tab2: React.FC = () => {
   const history = useHistory();
   const [reports, setReports] = useState<ReportData[]>([]);
+  const [allReports, setAllReports] = useState<ReportData[]>([]); // Todos os reports para contar
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState<FilterType>('all');
 
@@ -52,72 +55,34 @@ const Tab2: React.FC = () => {
     setLoading(true);
     try {
       const reportsData: ReportData[] = [];
+      const allReportsData: ReportData[] = [];
       
-      // Tentar fazer query com filtro no Firestore
+      // Sempre buscar todos os reports primeiro para ter os contadores
+      const allQuery = query(
+        collection(db, 'reports'),
+        orderBy('createdAt', 'desc')
+      );
+      
+      const allSnapshot = await getDocs(allQuery);
+      allSnapshot.forEach((doc) => {
+        const docData = doc.data();
+        const data = {
+          id: doc.id,
+          ...docData,
+          createdAt: docData.createdAt?.toDate ? docData.createdAt.toDate() : docData.createdAt,
+          updatedAt: docData.updatedAt?.toDate ? docData.updatedAt.toDate() : docData.updatedAt,
+        } as ReportData;
+        allReportsData.push(data);
+      });
+
+      // Filtrar conforme o filtro selecionado
       if (filter !== 'all') {
-        try {
-          // Query com filtro de status
-          const q = query(
-            collection(db, 'reports'),
-            where('status', '==', filter),
-            orderBy('createdAt', 'desc')
-          );
-          
-          const querySnapshot = await getDocs(q);
-          querySnapshot.forEach((doc) => {
-            const data = doc.data();
-            reportsData.push({
-              id: doc.id,
-              ...data,
-              createdAt: data.createdAt?.toDate ? data.createdAt.toDate() : data.createdAt,
-              updatedAt: data.updatedAt?.toDate ? data.updatedAt.toDate() : data.updatedAt,
-            } as ReportData);
-          });
-        } catch (firestoreError: unknown) {
-          // Se falhar (provavelmente falta índice composto), fazer fallback
-          console.warn('Erro na query com filtro, usando fallback:', firestoreError);
-          
-          // Buscar todos os reports e filtrar no cliente
-          const allQuery = query(
-            collection(db, 'reports'),
-            orderBy('createdAt', 'desc')
-          );
-          
-          const allSnapshot = await getDocs(allQuery);
-          allSnapshot.forEach((doc) => {
-            const docData = doc.data();
-            const data = {
-              id: doc.id,
-              ...docData,
-              createdAt: docData.createdAt?.toDate ? docData.createdAt.toDate() : docData.createdAt,
-              updatedAt: docData.updatedAt?.toDate ? docData.updatedAt.toDate() : docData.updatedAt,
-            } as ReportData;
-            
-            // Filtrar no lado do cliente - garantir que o status corresponda exatamente
-            if (data.status && data.status === filter) {
-              reportsData.push(data);
-            }
-          });
-        }
+        reportsData.push(...allReportsData.filter(r => r.status === filter));
       } else {
-        // Sem filtro, buscar todos
-        const q = query(
-          collection(db, 'reports'),
-          orderBy('createdAt', 'desc')
-        );
-        
-        const querySnapshot = await getDocs(q);
-        querySnapshot.forEach((doc) => {
-          const data = doc.data();
-          reportsData.push({
-            id: doc.id,
-            ...data,
-            createdAt: data.createdAt?.toDate ? data.createdAt.toDate() : data.createdAt,
-            updatedAt: data.updatedAt?.toDate ? data.updatedAt.toDate() : data.updatedAt,
-          } as ReportData);
-        });
+        reportsData.push(...allReportsData);
       }
 
+      setAllReports(allReportsData);
       setReports(reportsData);
     } catch (error) {
       console.error('Erro ao carregar ocorrências:', error);
@@ -192,6 +157,12 @@ const Tab2: React.FC = () => {
   };
 
   const filteredCount = reports.length;
+  
+  // Contadores por status
+  const getCountByStatus = (status: FilterType): number => {
+    if (status === 'all') return allReports.length;
+    return allReports.filter(r => r.status === status).length;
+  };
 
   return (
     <IonPage>
@@ -199,7 +170,7 @@ const Tab2: React.FC = () => {
         <IonToolbar>
           <IonTitle>Ocorrências</IonTitle>
         </IonToolbar>
-        <IonToolbar>
+        <IonToolbar >
           <IonSegment 
             value={filter} 
             onIonChange={(e) => {
@@ -208,18 +179,43 @@ const Tab2: React.FC = () => {
                 setFilter(newFilter);
               }
             }}
+            className="filter-segment"
           >
-            <IonSegmentButton value="all">
+            <IonSegmentButton value="all" className="filter-segment-button">
+              <IonIcon icon={listOutline} />
               <IonLabel>Todas</IonLabel>
+              {getCountByStatus('all') > 0 && (
+                <IonBadge color="primary" className="filter-badge">
+                  {getCountByStatus('all')}
+                </IonBadge>
+              )}
             </IonSegmentButton>
-            <IonSegmentButton value="pending">
+            <IonSegmentButton value="pending" className="filter-segment-button">
+              <IonIcon icon={ellipseOutline} />
               <IonLabel>Pendentes</IonLabel>
+              {getCountByStatus('pending') > 0 && (
+                <IonBadge color="warning" className="filter-badge">
+                  {getCountByStatus('pending')}
+                </IonBadge>
+              )}
             </IonSegmentButton>
-            <IonSegmentButton value="in_progress">
+            <IonSegmentButton value="in_progress" className="filter-segment-button">
+              <IonIcon icon={hourglassOutline} />
               <IonLabel>Em Andamento</IonLabel>
+              {getCountByStatus('in_progress') > 0 && (
+                <IonBadge color="primary" className="filter-badge">
+                  {getCountByStatus('in_progress')}
+                </IonBadge>
+              )}
             </IonSegmentButton>
-            <IonSegmentButton value="resolved">
+            <IonSegmentButton value="resolved" className="filter-segment-button">
+              <IonIcon icon={checkmarkDoneOutline} />
               <IonLabel>Resolvidas</IonLabel>
+              {getCountByStatus('resolved') > 0 && (
+                <IonBadge color="success" className="filter-badge">
+                  {getCountByStatus('resolved')}
+                </IonBadge>
+              )}
             </IonSegmentButton>
           </IonSegment>
         </IonToolbar>

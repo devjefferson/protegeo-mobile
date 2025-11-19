@@ -1,3 +1,11 @@
+/* Safe Area Support */
+ion-content {
+  --padding-top: calc(var(--ion-safe-area-top, 0) + 20px);
+  --padding-bottom: var(--ion-safe-area-bottom, 0);
+  --padding-start: var(--ion-safe-area-left, 0);
+  --padding-end: var(--ion-safe-area-right, 0);
+}
+
 .login-container {
   max-width: 400px;
   margin: 0 auto;

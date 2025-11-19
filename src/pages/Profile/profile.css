@@ -1,3 +1,11 @@
+/* Safe Area Support */
+ion-content {
+  --padding-top: var(--ion-safe-area-top, 0);
+  --padding-bottom: calc(var(--ion-safe-area-bottom, 0) + 20px);
+  --padding-start: var(--ion-safe-area-left, 0);
+  --padding-end: var(--ion-safe-area-right, 0);
+}
+
 .profile-container {
   max-width: 600px;
   margin: 0 auto;
@@ -72,6 +80,27 @@
 
 .profile-form ion-item[disabled] {
   opacity: 0.7;
+}
+
+/* Estilos para o toggle de tema */
+.profile-form ion-item h2 {
+  font-size: 16px;
+  font-weight: 500;
+  margin: 0;
+}
+
+.profile-form ion-item p {
+  font-size: 13px;
+  color: var(--ion-color-medium);
+  margin: 4px 0 0 0;
+}
+
+.profile-form ion-item ion-icon[slot="start"] {
+  margin-inline-end: 16px;
+}
+
+.profile-form ion-item ion-icon[slot="end"] {
+  margin-inline-start: 8px;
 }
 
 

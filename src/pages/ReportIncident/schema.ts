@@ -23,9 +23,9 @@ export const reportSchema = z.object({
   description: z
     .string()
     .min(10, "Descrição deve ter pelo menos 10 caracteres")
-    .max(500, "Descrição muito longa"),
+    .max(700, "Descrição muito longa"),
   category: z.enum(categories, {
-    errorMap: () => ({ message: "Selecione uma categoria" }),
+    message: "Selecione uma categoria",
   }),
   latitude: z.number().optional(),
   longitude: z.number().optional(),

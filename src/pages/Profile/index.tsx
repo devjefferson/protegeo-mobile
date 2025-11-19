@@ -12,7 +12,7 @@ import {
   IonList,
   IonItemDivider,
 } from "@ionic/react"
-import { personCircleOutline, logOutOutline, saveOutline, pencilOutline } from "ionicons/icons"
+import { personCircleOutline, logOutOutline, saveOutline, pencilOutline,  } from "ionicons/icons"
 import { useForm, Controller } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { profileSchema, type TProfileForm } from "./schema"
@@ -90,7 +90,7 @@ const Profile: React.FC = () => {
         color: "success",
       })
       history.replace("/login")
-    } catch (error) {
+    } catch {
       present({
         message: "Erro ao fazer logout",
         duration: 2000,
@@ -185,6 +185,7 @@ const Profile: React.FC = () => {
               </IonItem>
             </IonList>
 
+      
             {/* Botões de Ação */}
             {isEditing ? (
               <div className="profile-actions">

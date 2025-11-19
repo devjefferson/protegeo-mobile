@@ -1,10 +1,11 @@
 .page-header {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+  padding-top: var(--ion-safe-area-top, 0);
 }
 
 .page-header ion-toolbar {
   --min-height: 56px;
-  --padding-top: 8px;
+  --padding-top: calc(8px + var(--ion-safe-area-top, 0));
   --padding-bottom: 8px;
   --border-width: 0;
 }

@@ -1,3 +1,4 @@
+import { lazy, Suspense } from "react"
 import { IonReactRouter } from "@ionic/react-router"
 import {
   IonTabs,
@@ -13,11 +14,29 @@ import {
 import { Redirect, Route } from "react-router-dom"
 import { listOutline, personCircleOutline, homeOutline } from "ionicons/icons"
 import { AppRoutes } from "./screens"
-import Login from "../pages/Login"
-import Splash from "../pages/Splash"
-import ForgotPassword from "../pages/ForgotPassword"
-import Register from "../pages/Register"
 import { useAuth } from "../context/AuthContext"
+
+// Lazy loading das páginas de autenticação
+const Splash = lazy(() => import("../pages/Splash"))
+const Login = lazy(() => import("../pages/Login"))
+const ForgotPassword = lazy(() => import("../pages/ForgotPassword"))
+const Register = lazy(() => import("../pages/Register"))
+
+// Componente de loading para Suspense
+const PageLoader = () => (
+  <IonPage>
+    <IonContent className="ion-padding">
+      <div style={{ 
+        display: 'flex', 
+        justifyContent: 'center', 
+        alignItems: 'center', 
+        height: '100%' 
+      }}>
+        <IonSpinner name="crescent" />
+      </div>
+    </IonContent>
+  </IonPage>
+)
 
 export const AppRouter: React.FC = () => {
   const { isAuthenticated, loading } = useAuth()
@@ -67,13 +86,15 @@ export const AppRouter: React.FC = () => {
           </IonTabBar>
         </IonTabs>
       ) : (
-        <IonRouterOutlet>
-          <Route exact path="/splash" component={Splash} />
-          <Route exact path="/login" component={Login} />
-          <Route exact path="/forgot-password" component={ForgotPassword} />
-          <Route exact path="/register" component={Register} />
-          <Route exact path="/" render={() => <Redirect to="/splash" />} />
-        </IonRouterOutlet>
+        <Suspense fallback={<PageLoader />}>
+          <IonRouterOutlet>
+            <Route exact path="/splash" component={Splash} />
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/forgot-password" component={ForgotPassword} />
+            <Route exact path="/register" component={Register} />
+            <Route exact path="/" render={() => <Redirect to="/splash" />} />
+          </IonRouterOutlet>
+        </Suspense>
       )}
     </IonReactRouter>
   )

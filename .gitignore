@@ -29,3 +29,29 @@ yarn-error.log*
 
 # Optional eslint cache
 .eslintcache
+
+# Capacitor
+/android
+/ios
+/.capacitor
+
+# Android
+*.apk
+*.aab
+*.keystore
+*.jks
+android/app/build/
+android/.gradle/
+android/local.properties
+android/.idea/
+android/*.iml
+android/.externalNativeBuild/
+android/.cxx/
+
+# iOS
+ios/App/Pods/
+ios/App/build/
+*.xcworkspace
+!default.xcworkspace
+*.xcuserdata
+DerivedData/

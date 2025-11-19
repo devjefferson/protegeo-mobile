@@ -312,6 +312,32 @@ const ReportIncident: React.FC = () => {
     setPhotoPreview(photoPreview.filter((_, i) => i !== index))
   }
 
+  // Obter endereço a partir de coordenadas (geocoding reverso)
+  const getAddressFromCoordinates = async (lat: number, lng: number): Promise<string | null> => {
+    try {
+      const mapboxToken = mapboxgl.accessToken
+      const url = `https://api.mapbox.com/geocoding/v5/mapbox.places/${lng},${lat}.json?access_token=${mapboxToken}&language=pt`
+      
+      const response = await fetch(url)
+      if (!response.ok) {
+        throw new Error(`Erro na API do Mapbox: ${response.status}`)
+      }
+      
+      const data = await response.json()
+      
+      if (data.features && data.features.length > 0) {
+        // Pegar o endereço mais relevante (geralmente o primeiro)
+        const place = data.features[0]
+        return place.place_name || null
+      }
+      
+      return null
+    } catch (error) {
+      console.error("Erro ao obter endereço:", error)
+      return null
+    }
+  }
+
   // Upload de fotos para o Supabase Storage
   const uploadPhotos = async (userId: string): Promise<string[]> => {
     setUploadingPhotos(true)
@@ -441,7 +467,28 @@ const ReportIncident: React.FC = () => {
         throw new Error("Nenhuma foto foi enviada com sucesso")
       }
       
-      // PASSO 2: Salvar os links das fotos no Firestore
+      // PASSO 2: Obter endereço a partir das coordenadas
+      present({
+        message: "Obtendo endereço...",
+        duration: 1500,
+        color: "primary",
+      })
+      
+      let address = null
+      try {
+        address = await getAddressFromCoordinates(location.lat, location.lng)
+      } catch (error) {
+        console.error("Erro ao obter endereço:", error)
+        // Continuar mesmo se não conseguir obter o endereço
+      }
+      
+      // Adicionar endereço na descrição se obtido com sucesso
+      let finalDescription = data.description
+      if (address) {
+        finalDescription = `${data.description}\n\n📍 Localização: ${address}`
+      }
+
+      // PASSO 3: Salvar os links das fotos no Firestore
       present({
         message: "Salvando ocorrência...",
         duration: 1500,
@@ -450,6 +497,7 @@ const ReportIncident: React.FC = () => {
 
       const reportData: Omit<ReportData, "id"> = {
         ...data,
+        description: finalDescription,
         userId: user.uid,
         userName: userData.name,
         userEmail: user.email || "",

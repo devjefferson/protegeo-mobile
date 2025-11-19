@@ -1,3 +1,15 @@
+/* Safe Area Support */
+ion-content {
+  --padding-top: var(--ion-safe-area-top, 0);
+  --padding-bottom: var(--ion-safe-area-bottom, 0);
+  --padding-start: var(--ion-safe-area-left, 0);
+  --padding-end: var(--ion-safe-area-right, 0);
+}
+
+ion-header {
+  padding-top: var(--ion-safe-area-top, 0);
+}
+
 .profile-card-header {
   display: flex;
   align-items: center;

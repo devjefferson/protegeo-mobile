@@ -1,4 +1,5 @@
 import { IonApp, setupIonicReact } from "@ionic/react"
+import { useTheme } from "./hooks/useTheme"
 
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css"
@@ -24,8 +25,8 @@ import "@ionic/react/css/display.css"
  */
 
 /* import '@ionic/react/css/palettes/dark.always.css'; */
-/* import '@ionic/react/css/palettes/dark.class.css'; */
-import "@ionic/react/css/palettes/dark.system.css"
+import "@ionic/react/css/palettes/dark.class.css"
+/* import '@ionic/react/css/palettes/dark.system.css'; */
 
 /* Theme variables */
 import "./theme/variables.css"
@@ -34,11 +35,20 @@ import { AuthProvider } from "./context/AuthContext"
 
 setupIonicReact()
 
-const App: React.FC = () => (
-  <IonApp>
+const AppContent: React.FC = () => {
+  // Inicializar tema ao carregar o app
+  useTheme()
+
+  return (
     <AuthProvider>
       <AppRouter />
     </AuthProvider>
+  )
+}
+
+const App: React.FC = () => (
+  <IonApp>
+    <AppContent />
   </IonApp>
 )
 

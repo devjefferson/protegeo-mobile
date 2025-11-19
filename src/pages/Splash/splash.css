@@ -1,5 +1,9 @@
 .splash-content {
-  --background: var(--ion-background-color);
+  --background: linear-gradient(135deg, var(--ion-color-primary) 0%, var(--ion-color-primary-shade) 100%);
+  --padding-top: var(--ion-safe-area-top, 0);
+  --padding-bottom: var(--ion-safe-area-bottom, 0);
+  --padding-start: var(--ion-safe-area-left, 0);
+  --padding-end: var(--ion-safe-area-right, 0);
 }
 
 .splash-container {
@@ -9,32 +13,76 @@
   align-items: center;
   height: 100%;
   padding: 24px;
+  padding-top: calc(24px + var(--ion-safe-area-top, 0));
+  padding-bottom: calc(24px + var(--ion-safe-area-bottom, 0));
+  animation: fadeIn 0.5s ease-in;
+  transition: opacity 0.5s ease-out;
+}
+
+.splash-container.fade-out {
+  opacity: 0;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
 }
 
 .splash-logo {
-  width: 80px;
-  height: 80px;
-  margin-bottom: 20px;
-  border-radius: 20px;
-  background: var(--ion-color-primary);
+  width: 120px;
+  height: 120px;
+  margin-bottom: 32px;
+  border-radius: 30px;
+  background: rgba(255, 255, 255, 0.95);
   display: flex;
   align-items: center;
   justify-content: center;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  animation: pulse 2s ease-in-out infinite;
 }
 
 .splash-logo ion-icon {
-  font-size: 44px;
-  color: var(--ion-color-primary-contrast);
+  font-size: 64px;
+  color: var(--ion-color-primary);
 }
 
 .splash-title {
-  font-size: 32px;
+  font-size: 42px;
   font-weight: 700;
-  margin: 0 0 24px 0;
-  color: var(--ion-text-color);
+  margin: 0 0 8px 0;
+  color: white;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  letter-spacing: 1px;
+}
+
+.splash-subtitle {
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0 0 48px 0;
+  font-weight: 400;
 }
 
 .splash-progress {
-  width: 160px;
+  width: 200px;
   max-width: 80%;
+  margin-top: 24px;
+  --background: rgba(255, 255, 255, 0.3);
+  --progress-background: white;
+  border-radius: 4px;
+  overflow: hidden;
 }

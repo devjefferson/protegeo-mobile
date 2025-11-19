@@ -1,3 +1,11 @@
+/* Safe Area Support */
+ion-content {
+  --padding-top: var(--ion-safe-area-top, 0);
+  --padding-bottom: calc(var(--ion-safe-area-bottom, 0) + 20px);
+  --padding-start: var(--ion-safe-area-left, 0);
+  --padding-end: var(--ion-safe-area-right, 0);
+}
+
 .report-container {
   max-width: 600px;
   margin: 0 auto;

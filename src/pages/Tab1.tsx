@@ -22,7 +22,7 @@ import {
 } from 'ionicons/icons';
 import { useHistory } from 'react-router-dom';
 import { useState, useEffect, useRef } from 'react';
-import { collection, query, where, orderBy, getDocs, Timestamp } from 'firebase/firestore';
+import { collection, query,  orderBy, getDocs, Timestamp } from 'firebase/firestore';
 import { db } from '../config/firebase';
 import type { ReportData } from '../pages/ReportIncident/schema';
 import mapboxgl from 'mapbox-gl';
