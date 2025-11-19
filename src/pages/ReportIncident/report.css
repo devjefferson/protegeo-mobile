@@ -21,7 +21,7 @@ ion-content {
 .report-section {
   margin: 24px 0;
   padding: 16px;
-  background: var(--ion-color-light);
+  background: rgba(255, 255, 255, 0.05);
   border-radius: 12px;
 }
 
@@ -50,7 +50,7 @@ ion-content {
   aspect-ratio: 1;
   border-radius: 8px;
   overflow: hidden;
-  background: var(--ion-color-light-shade);
+  background: rgba(255, 255, 255, 0.05);
 }
 
 .photo-item img {
@@ -124,7 +124,7 @@ ion-content {
   border-radius: 8px;
   overflow: hidden;
   margin-bottom: 16px;
-  border: 2px solid var(--ion-color-light-shade);
+  border: 2px solid rgba(255, 255, 255, 0.1);
 }
 
 .location-map .mapboxgl-canvas {
@@ -155,19 +155,17 @@ ion-content {
   }
 }
 
-/* Modo escuro */
-@media (prefers-color-scheme: dark) {
-  .report-section {
-    background: rgba(255, 255, 255, 0.05);
-  }
+/* Dark mode sempre ativo */
+.report-section {
+  background: rgba(255, 255, 255, 0.05);
+}
 
-  .add-photo-btn {
-    background: rgba(255, 255, 255, 0.05);
-  }
+.add-photo-btn {
+  background: rgba(255, 255, 255, 0.05);
+}
 
-  .location-map {
-    border-color: rgba(255, 255, 255, 0.1);
-  }
+.location-map {
+  border-color: rgba(255, 255, 255, 0.1);
 }
 
 

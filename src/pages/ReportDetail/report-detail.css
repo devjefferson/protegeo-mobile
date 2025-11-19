@@ -117,7 +117,7 @@ ion-content {
 }
 
 .carousel-indicator.active {
-  background: white;
+  background: rgba(255, 255, 255, 0.05);
   width: 24px;
   border-radius: 4px;
 }
@@ -180,7 +180,7 @@ ion-content {
   gap: 16px;
   margin: 24px 0;
   padding: 16px;
-  background: var(--ion-color-light);
+  background: rgba(255, 255, 255, 0.05);
   border-radius: 12px;
 }
 
@@ -230,7 +230,7 @@ ion-content {
 .comments-section {
   margin-top: 32px;
   padding-top: 24px;
-  border-top: 2px solid var(--ion-color-light);
+  border-top: 2px solid rgba(255, 255, 255, 0.1);
 }
 
 .comments-header {
@@ -257,7 +257,7 @@ ion-content {
 .comment-form {
   margin-bottom: 24px;
   padding: 16px;
-  background: var(--ion-color-light);
+  background: rgba(255, 255, 255, 0.05);
   border-radius: 12px;
 }
 
@@ -277,7 +277,7 @@ ion-content {
 }
 
 .comment-item {
-  --background: var(--ion-color-light);
+  --background: rgba(255, 255, 255, 0.05);
   --padding-start: 12px;
   --padding-end: 12px;
   margin-bottom: 12px;
@@ -350,23 +350,22 @@ ion-content {
   }
 }
 
-/* Modo escuro */
-@media (prefers-color-scheme: dark) {
-  .detail-meta {
-    background: rgba(255, 255, 255, 0.05);
-  }
+/* Dark mode sempre ativo */
+.detail-meta {
+  background: rgba(255, 255, 255, 0.05);
+}
 
-  .comment-form {
-    background: rgba(255, 255, 255, 0.05);
-  }
+.comment-form {
+  background: rgba(255, 255, 255, 0.05);
+}
 
-  .comment-item {
-    --background: rgba(255, 255, 255, 0.05);
-  }
+.comment-item {
+  --background: rgba(255, 255, 255, 0.05);
+}
 
-  .comment-textarea {
-    border-color: rgba(255, 255, 255, 0.1);
-  }
+.comment-textarea {
+  border-color: rgba(255, 255, 255, 0.1);
+}
 }
 
 

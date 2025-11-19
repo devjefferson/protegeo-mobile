@@ -69,7 +69,7 @@ ion-content {
 .profile-logout {
   margin-top: 32px;
   padding-top: 24px;
-  border-top: 1px solid var(--ion-color-light);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 /* Adicionar espaçamento nos itens do formulário */

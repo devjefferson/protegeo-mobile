@@ -24,22 +24,11 @@ ion-toolbar {
   margin-top: -1px;
 }
 
-/* Light mode - background claro */
-@media (prefers-color-scheme: light) {
-  ion-toolbar {
-    --background: #ffffff;
-    --color: #000000;
-    --border-color: rgba(0, 0, 0, 0.13);
-  }
-}
-
-/* Dark mode - background escuro */
-@media (prefers-color-scheme: dark) {
-  ion-toolbar {
-    --background: #1e1e1e;
-    --color: #ffffff;
-    --border-color: rgba(255, 255, 255, 0.13);
-  }
+/* Dark mode sempre ativo */
+ion-toolbar {
+  --background: #1e1e1e;
+  --color: #ffffff;
+  --border-color: rgba(255, 255, 255, 0.13);
 }
 
 .reports-counter {
@@ -57,14 +46,14 @@ ion-toolbar {
 
 .report-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
 }
 
 .report-image-container {
   width: 100%;
   height: 200px;
   overflow: hidden;
-  background: var(--ion-color-light);
+  background: rgba(255, 255, 255, 0.05);
 }
 
 .report-image {
@@ -122,7 +111,7 @@ ion-toolbar {
   gap: 16px;
   margin-top: 16px;
   padding-top: 12px;
-  border-top: 1px solid var(--ion-color-light);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .meta-item {
@@ -158,7 +147,7 @@ ion-toolbar {
 
 .empty-icon {
   font-size: 80px;
-  color: var(--ion-color-light);
+  color: rgba(255, 255, 255, 0.3);
   margin-bottom: 16px;
 }
 
@@ -176,7 +165,7 @@ ion-toolbar {
 
 /* Segment customizado */
 .filter-segment {
-  --background: var(--ion-color-light);
+  --background: rgba(255, 255, 255, 0.1);
   padding: 0px 0px;
   margin: 0px 0px;
   overflow: hidden;
@@ -230,33 +219,31 @@ ion-toolbar {
   align-items: center;
   justify-content: center;
 }
+/* Estilos dark sempre ativos */
+.report-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
 
+.report-meta {
+  border-top-color: rgba(255, 255, 255, 0.1);
+}
 
-  .report-card:hover {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-  }
+.filter-segment {
+  --background: rgba(255, 255, 255, 0.1);
+}
 
-  .report-meta {
-    border-top-color: rgba(255, 255, 255, 0.1);
-  }
+.filter-segment-button {
+  --color: rgba(255, 255, 255, 0.6);
+  --color-checked: var(--ion-color-primary);
+}
 
-  .filter-segment {
-    --background: rgba(255, 255, 255, 0.1);
-  }
-
-  .filter-segment-button {
-    --color: rgba(255, 255, 255, 0.6);
-    --color-checked: var(--ion-color-primary);
-  }
-
-  .filter-segment-button[aria-checked="true"] {
-    --color: var(--ion-color-primary);
-    background: transparent;
-    border: 2px solid var(--ion-color-primary);
-    border-radius: 0;
-    padding: 0px 0px;
-    
-  }
+.filter-segment-button[aria-checked="true"] {
+  --color: var(--ion-color-primary);
+  background: transparent;
+  border: 2px solid var(--ion-color-primary);
+  border-radius: 0;
+  padding: 0px 0px;
+}
 
 
 /* Melhorias visuais para o segment */

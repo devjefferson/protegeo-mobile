@@ -35,10 +35,8 @@
   margin-inline-start: 4px;
 }
 
-/* Modo escuro */
-@media (prefers-color-scheme: dark) {
-  .page-header {
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-  }
+/* Dark mode sempre ativo */
+.page-header {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 

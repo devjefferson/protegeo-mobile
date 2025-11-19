@@ -24,8 +24,8 @@ import "@ionic/react/css/display.css"
  * https://ionicframework.com/docs/theming/dark-mode
  */
 
-/* import '@ionic/react/css/palettes/dark.always.css'; */
-import "@ionic/react/css/palettes/dark.class.css"
+import "@ionic/react/css/palettes/dark.always.css"
+/* import '@ionic/react/css/palettes/dark.class.css'; */
 /* import '@ionic/react/css/palettes/dark.system.css'; */
 
 /* Theme variables */
@@ -46,10 +46,18 @@ const AppContent: React.FC = () => {
   )
 }
 
-const App: React.FC = () => (
-  <IonApp>
-    <AppContent />
-  </IonApp>
-)
+const App: React.FC = () => {
+  // Garantir que o tema dark seja aplicado imediatamente
+  if (typeof document !== 'undefined') {
+    document.documentElement.classList.add('ion-theme-dark')
+    document.documentElement.classList.remove('ion-theme-light')
+  }
+
+  return (
+    <IonApp>
+      <AppContent />
+    </IonApp>
+  )
+}
 
 export default App
