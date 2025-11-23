@@ -16,7 +16,6 @@ const Splash: React.FC = () => {
         await SplashScreen.hide()
       } catch {
         // Ignorar erro se não estiver rodando em plataforma nativa
-        console.log("Splash nativo não disponível (provavelmente web)")
       }
     }
     

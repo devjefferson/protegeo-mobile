@@ -145,7 +145,6 @@ const ReportDetail: React.FC = () => {
           } as Comment)
         })
         setComments(commentsData)
-        console.log("Comentários carregados:", commentsData.length)
       } catch (commentError) {
         // Se der erro (ex: índice não criado), buscar sem ordenação
         console.error("Erro ao buscar comentários ordenados, tentando sem ordenação:", commentError)
@@ -169,7 +168,6 @@ const ReportDetail: React.FC = () => {
             return dateB.getTime() - dateA.getTime()
           })
           setComments(commentsData)
-          console.log("Comentários carregados (sem ordenação):", commentsData.length)
         } catch (err) {
           console.error("Erro ao buscar comentários:", err)
           setComments([])
@@ -342,9 +340,8 @@ const ReportDetail: React.FC = () => {
         createdAt: serverTimestamp(),
       }
 
-      console.log("Adicionando comentário:", commentData)
-      const docRef = await addDoc(collection(db, "comments"), commentData)
-      console.log("Comentário adicionado com ID:", docRef.id)
+      await addDoc(collection(db, "comments"), commentData)
+
 
       // Atualizar contador de comentários - usar setDoc com merge
       const interactionRef = doc(db, "report_interactions", id)
@@ -733,7 +730,6 @@ const ReportDetail: React.FC = () => {
                   </div>
                 ) : (
                   <>
-                    {console.log("Renderizando", comments.length, "comentários")}
                     {comments.map((comment) => (
                       <IonItem key={comment.id} lines="none" className="comment-item">
                         <IonAvatar slot="start">

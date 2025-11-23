@@ -24,17 +24,10 @@ export const serviceUploadsImage = async ({
   
   for (const filePath of filePaths) {
     try {
-      console.log('Tentando upload com caminho:', filePath);
-      console.log('Detalhes:', { 
-        name, 
-        path, 
-        size: image.size, 
-        type: image.type,
-        bucket: 'protegeo'
-      });
+ 
       
       // Fazer upload da imagem
-      const { data: uploadData, error: uploadError } = await supabase.storage
+      const {  error: uploadError } = await supabase.storage
         .from('protegeo')
         .upload(filePath, image, {
           cacheControl: '3600',
@@ -58,7 +51,6 @@ export const serviceUploadsImage = async ({
         continue;
       }
 
-      console.log('Upload concluído com sucesso:', uploadData);
 
       // Obter URL pública da imagem
       const { data: urlData } = supabase.storage
@@ -69,7 +61,6 @@ export const serviceUploadsImage = async ({
         throw new Error('Erro ao obter URL pública da imagem');
       }
 
-      console.log('URL pública obtida:', urlData.publicUrl);
 
       return urlData.publicUrl;
     } catch (error) {

@@ -69,11 +69,9 @@ const Tab1: React.FC = () => {
 
         // Esperar o mapa carregar completamente
         map.current.on('load', () => {
-          console.log('Mapa carregado e pronto para marcadores');
           setMapLoaded(true);
         });
 
-        console.log('Mapa inicializado com sucesso');
       } catch (error) {
         console.error('Erro ao inicializar mapa:', error);
       }
@@ -92,7 +90,6 @@ const Tab1: React.FC = () => {
   // Update markers when reports change
   useEffect(() => {
     if (!map.current || !mapLoaded) {
-      console.log('Aguardando mapa carregar...');
       return;
     }
 
@@ -105,8 +102,7 @@ const Tab1: React.FC = () => {
       return;
     }
 
-    console.log(`Adicionando ${reports.length} marcadores ao mapa`);
-    console.log(reports)
+ 
     // Add new markers
     const bounds = new mapboxgl.LngLatBounds();
     let hasValidCoordinates = false;
@@ -114,10 +110,7 @@ const Tab1: React.FC = () => {
 
     reports.forEach((report) => {
       if (report.latitude && report.longitude) {
-        console.log(`📍 Ocorrência: ${report.title}`);
-        console.log(`   Latitude (raw): ${report.latitude} (tipo: ${typeof report.latitude})`);
-        console.log(`   Longitude (raw): ${report.longitude} (tipo: ${typeof report.longitude})`);
-
+       
         // Converter para número se necessário
         const lat = typeof report.latitude === 'number' ? report.latitude : parseFloat(String(report.latitude));
         const lng = typeof report.longitude === 'number' ? report.longitude : parseFloat(String(report.longitude));
@@ -143,7 +136,6 @@ const Tab1: React.FC = () => {
         hasValidCoordinates = true;
         markersAdded++;
 
-        console.log(`✅ Adicionando marcador em [lng: ${lng}, lat: ${lat}]`);
 
         // Verificar se as coordenadas são válidas
         if (lng === 0 && lat === 0) {
@@ -176,14 +168,12 @@ const Tab1: React.FC = () => {
             )
           );
         
-        console.log(`   Marcador criado com anchor 'bottom', coordenadas:`, marker.getLngLat());
         
         marker.addTo(map.current!);
 
         markersRef.current.push(marker);
         bounds.extend([lng, lat]);
         
-        console.log(`✅ Marcador adicionado ao mapa para: ${report.title}`);
       } else {
         console.log(`Ocorrência sem coordenadas: ${report.title}`);
       }
@@ -197,7 +187,6 @@ const Tab1: React.FC = () => {
         padding: 50,
         maxZoom: 15,
       });
-      console.log('Mapa ajustado para mostrar todos os marcadores');
     }
   }, [reports, mapLoaded]);
 

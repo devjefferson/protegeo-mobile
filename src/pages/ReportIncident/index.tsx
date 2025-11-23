@@ -365,12 +365,7 @@ const ReportIncident: React.FC = () => {
           const fileName = `${timestamp}_${index}_${photo.name.replace(/[^a-zA-Z0-9.]/g, '_')}`
           const path = `reports/${userId}`
           
-          console.log(`Preparando upload da foto ${index + 1}:`, {
-            fileName,
-            path,
-            size: photo.size,
-            type: photo.type,
-          })
+       
           
           // Converter File para ImageState (adicionar preview se necessário)
           const imageWithPreview: ImageState = Object.assign(photo, {
@@ -384,7 +379,6 @@ const ReportIncident: React.FC = () => {
             path: path,
           })
           
-          console.log(`Upload da foto ${index + 1} concluído:`, imageUrl)
           
           // Validar URL retornada
           if (!imageUrl || typeof imageUrl !== 'string') {

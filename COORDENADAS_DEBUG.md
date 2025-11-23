@@ -89,9 +89,7 @@ async function fixInvertedCoordinates() {
     // Natal está em aprox. lat=-5.79, lng=-35.20
     if (lat < -10 && lng > -10) {
       // Coordenadas provavelmente invertidas
-      console.log(`Corrigindo: ${docSnap.id}`);
-      console.log(`  Antes: lat=${lat}, lng=${lng}`);
-      console.log(`  Depois: lat=${lng}, lng=${lat}`);
+ 
       
       await updateDoc(doc(db, 'reports', docSnap.id), {
         latitude: lng,
@@ -102,7 +100,6 @@ async function fixInvertedCoordinates() {
     }
   }
   
-  console.log(`${fixed} ocorrências corrigidas!`);
 }
 
 // Executar: fixInvertedCoordinates();
